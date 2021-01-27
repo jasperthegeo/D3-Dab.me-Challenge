@@ -16,22 +16,28 @@ function errorHandle(error) {
 };
 
 //Loop thru data data
-function successHandle.then(healthData) => {
-    healthData.forEach(function(data) {
-        // healthcare vs poverty
-        data.healthcare = +data.healthcare;
+function successHandle (healthData {
+    healthData.map(function (data) {
         data.poverty = +data.poverty;
-        
-        // smokers vs age
-        data.age = +data.age;
-        data.smokes = +data.smokes;
-
-        // obesity vs household income
         data.obesity = +data.obesity;
-        data.income = +data.income;
-
     });
-        
 });
 
+//SVG canvas w/h parameters
+//Set the margins, and create a w/h 
+var svgWidth = 1024;
+var svgHeight = 768;
 
+//Set margins
+var margin = {
+    top: 24,
+    bottom:24,
+    right: 34,
+    left: 34
+};
+
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+
+
+//

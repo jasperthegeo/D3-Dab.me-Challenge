@@ -4,6 +4,7 @@
 
 //Import required data
 var file = "assets/data/data.csv"
+d3.csv(file).then(successHandle, errorHandle);
 
 //Use an error-handing function to append data and objects
 //If an error does persist, it will be visible within the console
@@ -13,4 +14,6 @@ var file = "assets/data/data.csv"
 function errorHandle(error) {
     throw error;
 };
+
+//Loop thru data
 

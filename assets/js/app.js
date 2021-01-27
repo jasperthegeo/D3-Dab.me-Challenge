@@ -4,3 +4,13 @@
 
 //Import required data
 var file = "assets/data/data.csv"
+
+//Use an error-handing function to append data and objects
+//If an error does persist, it will be visible within the console
+//for more information please refer to;
+// https://expressjs.com/en/guide/error-handling.html
+
+function errorHandle(error) {
+    throw error;
+};
+

@@ -18,8 +18,17 @@ function errorHandle(error) {
 //Loop thru data data
 function successHandle (healthData {
     healthData.map(function (data) {
+        // Obesity vs poverty
         data.poverty = +data.poverty;
         data.obesity = +data.obesity;
+
+        // smokers vs age
+        data.age = +data.age;
+        data.smokes = +data.smokes;
+
+        // obesity vs household income
+        data.obesity = +data.obesity;
+        data.income = +data.income;
     });
 });
 
@@ -39,5 +48,13 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
+//Specify SVG canvas attributes
+var svg = d3.select("#scatter")
+    .append("svg")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
 
-//
+//Create chart grouping aka chartGroup that will contain data
+var chartGroup = svg.append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+

@@ -80,7 +80,21 @@ var bottomAxis = d3.axisBottom(xLinearScale).tick(10);
   chartGroup.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
-    
+
 //Left Axis
 chartGroup.append("g")
     .call(leftAxis);
+
+
+//Scatter plot circle attributing
+var scatterGroup = chartGroup.selectAll()
+    .data(healthData)
+    .enter()
+    .append("text")
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.obesity))
+    .style("font-size", "10px")
+    .attr("text-anchor", "middle")
+    .style('fill', 'black')
+    //.style("stroke", 'white', "stroke-opacity=0.5")
+    .text(d => (d.abbr));

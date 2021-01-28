@@ -64,9 +64,23 @@ var chartGroup = svg.append("g")
 
 //Linear scale; min/max of data to be displayed on the axis
 var xLinearScale = d3.scaleLinear()
-    .domain([8.5, d3.max(healthData, d=>d.poverty)])
+    .domain([8.5, d3.max(healthData, d=>d.poverty)+ 2])
     .range([height,0]);
 
 var yLinearScale =d3.scaleLinear()
-    .domain([20, d3.max(healthData, d => d.obesity)])
-    .range([height, 0])
+    .domain([20, d3.max(healthData, d => d.obesity) +2 ])
+    .range([height, 0]);
+
+var leftAxis = d3.axisLeft(yLinearScale).ticks(10);
+var bottomAxis = d3.axisBottom(xLinearScale).tick(10);
+
+
+//Group them in a chartgrouping
+//Bottom Axis
+  chartGroup.append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
+    
+//Left Axis
+chartGroup.append("g")
+    .call(leftAxis);

@@ -58,3 +58,15 @@ var svg = d3.select("#scatter")
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+//Create Scale functions - For the first iteration they will be variables
+//once complete they will be moved into a function so as to allow an animated
+//axis change
+
+//Linear scale; min/max of data to be displayed on the axis
+var xLinearScale = d3.scaleLinear()
+    .domain([8.5, d3.max(healthData, d=>d.poverty)])
+    .range([height,0]);
+
+var yLinearScale =d3.scaleLinear()
+    .domain([20, d3.max(healthData, d => d.obesity)])
+    .range([height, 0])

@@ -94,7 +94,19 @@ var scatterGroup = chartGroup.selectAll()
     .attr("x", d => xLinearScale(d.poverty))
     .attr("y", d => yLinearScale(d.obesity))
     .style("font-size", "10px")
+    .attr("font-weight", 600)
     .attr("text-anchor", "middle")
     .style('fill', 'black')
-    //.style("stroke", 'white', "stroke-opacity=0.5")
+    .attr("stroke", "white")
+    .attr("stroke-width", 1)
+    .attr("stroke-opacity", 0.25)
     .text(d => (d.abbr));
+
+//Create mouse on tool-tip
+var mouseOnToolTip = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([65, -65])
+    .html(function(read) {
+        return (`${read.state}<br> Poverty: ${read.poverty}% <br> Obesity: ${read.obesity}%`);
+    });
+

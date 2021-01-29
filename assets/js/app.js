@@ -13,10 +13,10 @@ d3.csv(file).then(successHandle, errorHandle);
 
 function errorHandle(error) {
     throw error;
-};
+}
 
 //Loop thru data data
-function successHandle (healthData {
+function successHandle (healthData) {
     healthData.map(function (data) {
         // Obesity vs poverty
         data.poverty = +data.poverty;
@@ -29,7 +29,6 @@ function successHandle (healthData {
         // obesity vs household income
         data.obesity = +data.obesity;
         data.income = +data.income;
-    });
 });
 
 //SVG canvas w/h parameters
@@ -40,7 +39,7 @@ var svgHeight = 768;
 //Set margins
 var margin = {
     top: 24,
-    bottom:24,
+    bottom:48,
     right: 34,
     left: 34
 };
@@ -72,12 +71,12 @@ var yLinearScale =d3.scaleLinear()
     .range([height, 0]);
 
 var leftAxis = d3.axisLeft(yLinearScale).ticks(10);
-var bottomAxis = d3.axisBottom(xLinearScale).tick(10);
+var bottomAxis = d3.axisBottom(xLinearScale).ticks(10);
 
 
 //Group them in a chartgrouping
 //Bottom Axis
-  chartGroup.append("g")
+chartGroup.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
 
@@ -86,8 +85,19 @@ chartGroup.append("g")
     .call(leftAxis);
 
 
+  // Create Circles for scatter plot
+var scatterGroup = chartGroup.selectAll("circle")
+    .data(healthData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.poverty))
+    .attr("cy", d => yLinearScale(d.obesity))
+    .attr("r", "11.5")
+    .attr("fill", "#f57e42")
+    .attr("opacity", ".85")
+
 //Scatter plot circle attributing
-var scatterGroup = chartGroup.selectAll()
+var scatterGroup = chartGroup.selectAll("text")
     .data(healthData)
     .enter()
     .append("text")
@@ -100,7 +110,10 @@ var scatterGroup = chartGroup.selectAll()
     .attr("stroke", "white")
     .attr("stroke-width", 1)
     .attr("stroke-opacity", 0.25)
-    .text(d => (d.abbr));
+    .text(d => (d.abbr))
+    .merge(scatterGroup);
+
+scatterGroup.exit().remove()
 
  // Create axes labels
 chartGroup.append("text")
@@ -115,7 +128,7 @@ chartGroup.append("text")
     .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
     .attr("class", "axisText")
     .text("In Poverty (%)");
-}
+};
 
 //Create mouse on tool-tip variable, and call it in the chart
 var mouseOnToolTip = d3.tip()
@@ -135,5 +148,5 @@ scatterGroup.on("mouseover", function(data) {
     })
     .on("mouseout", function(data){
         mouseOnToolTip.hide(data);
-});
-
+})
+};

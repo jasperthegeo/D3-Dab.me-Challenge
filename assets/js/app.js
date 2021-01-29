@@ -102,11 +102,23 @@ var scatterGroup = chartGroup.selectAll()
     .attr("stroke-opacity", 0.25)
     .text(d => (d.abbr));
 
-//Create mouse on tool-tip
+//Create mouse on tool-tip variable, and call it in the chart
 var mouseOnToolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([65, -65])
     .html(function(read) {
         return (`${read.state}<br> Poverty: ${read.poverty}% <br> Obesity: ${read.obesity}%`);
     });
+
+chartGroup.call(mouseOnToolTip);
+
+//Create an event listener for the mouse to roam on to the tool tip, 
+//activate it and de-activate it as neccessary
+
+scatterGroup.on("mouseover", function(data) {
+    mouseOnToolTip.show(data, this);
+    })
+    .on("mouseout", function(data){
+        mouseOnToolTip.hide(data);
+});
 

@@ -102,6 +102,21 @@ var scatterGroup = chartGroup.selectAll()
     .attr("stroke-opacity", 0.25)
     .text(d => (d.abbr));
 
+ // Create axes labels
+chartGroup.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left + 40)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .attr("class", "axisText")
+    .text("Obese (%)");
+
+chartGroup.append("text")
+    .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+    .attr("class", "axisText")
+    .text("In Poverty (%)");
+}
+
 //Create mouse on tool-tip variable, and call it in the chart
 var mouseOnToolTip = d3.tip()
     .attr("class", "d3-tip")

@@ -101,38 +101,38 @@ d3.csv("assets/data/data.csv").then((healthData) => {
         .attr("x", 0)
         .attr("y", 15) //this attribute is how you order the list, the +15 sets the space from the bottom of the graph
         .attr("value", "poverty") // Listener Event Tag
-        .attr("class", "active")
-        .text("Below Poverty Line (%)");
+        .attr("class", "active") // Default Event
+        .text("Below Poverty Line (%)"); // Axis title text 
 
     var yObesityLabel = yLabelsGroup.append("text")
         .attr("y", 0 - margin.left + 50)
         .attr("x", 0 - (height/2)) // list order placement
         .attr("dy", "1em")
-        .attr("class", "active")
+        .attr("class", "active") // Default Event
         .attr("value","obesity") // Listener Event tag
-        .text("Obesity (%)");
+        .text("Obesity (%)"); // Axis title text
 
     var ySmokesLabel = yLabelsGroup.append("text")
         .attr("y", 0 - margin.left + 30)
-        .attr("x", 0 - (height/2))
+        .attr("x", 0 - (height/2)) // list order placement
         .attr("dy", "1em")
-        .attr("class", "inactive")
-        .attr("value","smokes")
-        .text("Smokers (%)");
+        .attr("class", "inactive") // Inactive axis selection
+        .attr("value","smokes") // Listener event tag
+        .text("Smokers (%)"); // axis title text
 
     var xAgeLabel = xlabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 40)
+        .attr("y", 40) // li
         .attr("value", "age") // Listener event tag
-        .attr("class", "inactive")
-        .text("Age (Median)");
+        .attr("class", "inactive") //Listener event tag
+        .text("Age (Median)"); // axis title text 
     
     var xIncomeLabel = xlabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 60)
-        .attr("value", "income") // value to grab for event listener
-        .attr("class", "inactive")
-        .text("Household Income (Median)");
+        .attr("value", "income") // Listening event tag
+        .attr("class", "inactive") // listener event tag
+        .text("Household Income (Median)"); // axis title event
 
     var yHealthLabel = yLabelsGroup.append("text")
         .attr("y", 0 - margin.left + 10)

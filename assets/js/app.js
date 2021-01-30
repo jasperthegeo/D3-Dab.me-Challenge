@@ -119,3 +119,10 @@ d3.csv("assets/data/data.csv").then((healthData) => {
         .attr("class", "inactive")
         .attr("value","smokes")
         .text("Smokers (%)");
+
+        var xAgeLabel = xlabelsGroup.append("text")
+        .attr("x", 0)
+        .attr("y", 40)
+        .attr("value", "age") // value to grab for event listener
+        .attr("class", "inactive")
+        .text("Age (Median)");

@@ -76,3 +76,31 @@ d3.csv("assets/data/data.csv").then((healthData) => {
                 .attr("r", "11.5")
                 .attr("fill", "#f57e42")
                 .attr("opacity", ".85")
+
+    var scatterText = chartGroup.selectAll()
+                .data(healthData)
+                .enter()
+                .append("text")
+                .text(d => d.abbr)
+                .attr("x", d => xLinearScale(d[selectedXaxis]))
+                .attr("y", d => yLinearScale(d[selectedYaxis]))
+                .style("font-size", "10px")
+                .attr("font-weight", 600)
+                .attr("text-anchor", "middle")
+                .style('fill', 'black')
+                .attr("stroke", "white")
+                .attr("stroke-width", 1)
+                .attr("stroke-opacity", 0.25)
+
+
+    //Create the required axes labels
+    var labelsGroup = chartGroup.append("g")
+        .attr("class", "x-labels")
+        .attr("transform", `translate(${width / 2}, ${height + 15})`);
+
+    var xPovertyLabel = labelsGroup.append("text")
+        .attr("x", 0)
+        .attr("y", 20)
+        .attr("value", "poverty")
+        .attr("class", "active")
+        .text("Below Poverty Line (%)");

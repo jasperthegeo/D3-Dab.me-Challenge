@@ -45,3 +45,11 @@ d3.csv("assets/data/data.csv").then((healthData) => {
         data.income = +data.income;
 
     });
+
+    //Create the x/y linear scales, and then feed them into
+    //the d3 bottom/left axes functions
+    var xLinearScale = xScale(healthData, selectedXaxis);
+    var yLinearScale = yScale(healthData, selectedYaxis);
+
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);

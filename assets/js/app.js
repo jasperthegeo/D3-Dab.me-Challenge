@@ -16,7 +16,13 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-var w = parseInt(d3.select("#scatter").style("width")) + margin.left + margin.right;
+var maxWidth = parseInt(d3.select("#scatter").style("width")) + margin.left + margin.right;
 
+var svg = d3
+    .select("#scatter")
+    .append("svg")
+    .classed("chart", true)
+    .attr("width", maxWidth)  
+    .attr("height", svgHeight)
 
 //Import Data

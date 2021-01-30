@@ -53,3 +53,26 @@ d3.csv("assets/data/data.csv").then((healthData) => {
 
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
+
+    //create the appending variables
+    var xAxis = chartGroup.append("g")
+                .classed("x-axis", true)
+                .attr("transform", `translate(0, ${height})`)
+                .call(bottomAxis);
+
+    var yAxis = chartGroup.append("g")
+                .classed("y-axis", true)
+                .call(leftAxis);
+
+    
+    //use the circle and text groups from old_app.js
+    var scatterGroup = chartGroup.selectAll()
+                .data(healthData)
+                .enter()
+                .append("circle")
+                .attr("class", d => d.abbr)
+                .attr("cx", d => xLinearScale(d[selectedXaxis]))
+                .attr("cy", d => yLinearScale(d[selectedYaxis]))
+                .attr("r", "11.5")
+                .attr("fill", "#f57e42")
+                .attr("opacity", ".85")

@@ -141,3 +141,45 @@ d3.csv("assets/data/data.csv").then((healthData) => {
         .attr("class", "inactive")
         .attr("value", "healthcare")
         .text("Inadequate Healthcare (%)");
+
+
+    // attach event listener to axes labels
+    xLabelsGroup.selectAll("text")
+        .on("click", function() {
+        // listen/get selected value
+            var value = d3.select(this).attr("value");
+            if (value !== selectedXaxis) {
+            selectedXaxis = value;
+
+             // update x axis scale
+             xLinearScale = xScale(healthData, selectedXaxis);
+             xAxis = renderXAxis(xLinearScale, xAxis);
+
+             // update scatter plot with new values
+             scatterGroup = renderCircles(scatterGroup, xLinearScale, selectedXaxis, yLinearScale, selectedYaxis);
+             scatterText = renderTexts(scatterText, xLinearScale, selectedXaxis, yLinearScale, selectedYaxis);
+
+             // update tooltip
+             scatterGroup, scatterText = updateToolTip(selectedXaxis, selectedYaxis, scatterGroup, scatterText);
+            
+             // Highlight active data
+             switch (selectedXaxis) {
+                 case "poverty":
+                     xPovertyLabel.classed("active", true).classed("inactive", false);
+                     xAgeLabel.classed("inactive", true);
+                     xIncomeLabel.classed("inactive", true);
+                     break;
+                 case "age":
+                     xAgeLabel.classed("active", true).classed("inactive", false);
+                     xPovertyLabel.classed("inactive", true);
+                     xIncomeLabel.classed("inactive", true);
+                     break;
+                 case "income":
+                     xIncomeLabel.classed("active", true).classed("inactive", false);
+                     xAgeLabel.classed("inactive", true);
+                     xPovertyLabel.classed("inactive", true);
+                     break;
+             }
+         }
+     }
+     )  // on-click event

@@ -32,15 +32,10 @@ d3.csv("assets/data/data.csv").then((healthData) => {
     // parse the data to numeric values
     healthData.forEach(function(data) {
 
-        // healthcare vs poverty
         data.healthcare = +data.healthcare;
         data.poverty = +data.poverty;
-        
-        // smokers vs age
         data.age = +data.age;
         data.smokes = +data.smokes;
-
-        // obesity vs household income
         data.obesity = +data.obesity;
         data.income = +data.income;
 

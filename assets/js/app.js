@@ -100,16 +100,16 @@ d3.csv("assets/data/data.csv").then((healthData) => {
     var xPovertyLabel = xlabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 15) //this attribute is how you order the list, the +15 sets the space from the bottom of the graph
-        .attr("value", "poverty")
+        .attr("value", "poverty") // Listener Event Tag
         .attr("class", "active")
         .text("Below Poverty Line (%)");
 
     var yObesityLabel = yLabelsGroup.append("text")
         .attr("y", 0 - margin.left + 50)
-        .attr("x", 0 - (height/2))
+        .attr("x", 0 - (height/2)) // list order placement
         .attr("dy", "1em")
-        .attr("class", "inactive")
-        .attr("value","obesity")
+        .attr("class", "active")
+        .attr("value","obesity") // Listener Event tag
         .text("Obesity (%)");
 
     var ySmokesLabel = yLabelsGroup.append("text")
@@ -120,9 +120,24 @@ d3.csv("assets/data/data.csv").then((healthData) => {
         .attr("value","smokes")
         .text("Smokers (%)");
 
-        var xAgeLabel = xlabelsGroup.append("text")
+    var xAgeLabel = xlabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 40)
-        .attr("value", "age") // value to grab for event listener
+        .attr("value", "age") // Listener event tag
         .attr("class", "inactive")
         .text("Age (Median)");
+    
+    var xIncomeLabel = xlabelsGroup.append("text")
+        .attr("x", 0)
+        .attr("y", 60)
+        .attr("value", "income") // value to grab for event listener
+        .attr("class", "inactive")
+        .text("Household Income (Median)");
+
+    var yHealthLabel = yLabelsGroup.append("text")
+        .attr("y", 0 - margin.left + 10)
+        .attr("x", 0 - (height/2))
+        .attr("dy", "1em")
+        .attr("class", "inactive")
+        .attr("value", "healthcare")
+        .text("Inadequate Healthcare (%)");

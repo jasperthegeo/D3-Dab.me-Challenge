@@ -30,3 +30,11 @@ body {
   font-size: 16px;
 }
 h1 {text-align: center;}
+
+div.article {
+  text-align: justify;
+  text-justify: inter-word;
+}
+div.references{
+  font-size:small
+}

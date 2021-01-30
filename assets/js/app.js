@@ -89,13 +89,33 @@ d3.csv("assets/data/data.csv").then((healthData) => {
 
 
     //Create the required axes labels
-    var labelsGroup = chartGroup.append("g")
+    var xlabelsGroup = chartGroup.append("g")
         .attr("class", "x-labels")
         .attr("transform", `translate(${width / 2}, ${height + 15})`);
 
-    var xPovertyLabel = labelsGroup.append("text")
+    var yLabelsGroup = chartGroup.append("g")
+        .attr("class", "y-labels")
+        .attr("transform", "rotate(-90)")
+
+    var xPovertyLabel = xlabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 20)
+        .attr("y", 15) //this attribute is how you order the list, the +15 sets the space from the bottom of the graph
         .attr("value", "poverty")
         .attr("class", "active")
         .text("Below Poverty Line (%)");
+
+    var yObesityLabel = yLabelsGroup.append("text")
+        .attr("y", 0 - margin.left + 50)
+        .attr("x", 0 - (height/2))
+        .attr("dy", "1em")
+        .attr("class", "inactive")
+        .attr("value","obesity")
+        .text("Obesity (%)");
+
+    var ySmokesLabel = yLabelsGroup.append("text")
+        .attr("y", 0 - margin.left + 30)
+        .attr("x", 0 - (height/2))
+        .attr("dy", "1em")
+        .attr("class", "inactive")
+        .attr("value","smokes")
+        .text("Smokers (%)");

@@ -25,7 +25,7 @@ var svg = d3
     .attr("width", maxWidth)  
     .attr("height", svgHeight)
 
-//Import Data
+//Import Data & do the stuff!
 // import the data from /data/data.csv
 d3.csv("assets/data/data.csv").then((healthData) => {
 
@@ -179,7 +179,51 @@ d3.csv("assets/data/data.csv").then((healthData) => {
                      xAgeLabel.classed("inactive", true);
                      xPovertyLabel.classed("inactive", true);
                      break;
-             }
-         }
-     }
-     )  // on-click event
+                }
+            }
+        }
+    )
+
+    yLabelsGroup.selectAll("text")
+    .on("click", function() {
+        // update y axis scale
+        var value = d3.select(this).attr("value");
+        if (value !== selectedYaxis) {
+            selectedYaxis = value;
+
+            yLinearScale = yScale(healthData, selectedYaxis);
+            yAxis = renderYAxis(yLinearScale, yAxis);
+
+            // update circles with new x values and texts
+            scatterGroup = renderCircles(scatterGroup, xLinearScale, selectedXaxis, yLinearScale, selectedYaxis);
+            scatterText = renderTexts(scatterText, xLinearScale, selectedXaxis, yLinearScale, selectedYaxis);
+
+            // update tooltip
+            scatterGroup, scatterText = updateToolTip(selectedXaxis, selectedYaxis, scatterGroup, scatterText);
+
+
+            // change classes to bold text
+            switch (selectedYaxis) {
+                case "healthcare":
+                    yObesityLabel.classed("active", true).classed("inactive", false);
+                    ySmokesLabel.classed("inactive", true);
+                    yHealthLabel.classed("inactive", true);
+                    break;
+                case "smokes":
+                    ySmokesLabel.classed("active", true).classed("inactive", false);
+                    yHealthLabel.classed("inactive", true);
+                    yObesityLabel.classed("inactive", true);
+                    break;
+                case "obesity":
+                    yObesityLabel.classed("active", true).classed("inactive", false);
+                    ySmokesLabel.classed("inactive", true);
+                    yHealthLabel.classed("inactive", true);
+                    break;
+            }
+        }
+        
+    });    
+
+}).catch(function(error) {
+    console.log(error);
+});

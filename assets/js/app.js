@@ -153,7 +153,7 @@ d3.csv("assets/data/data.csv").then((healthData) => {
 
              // update x axis scale
              xLinearScale = xScale(healthData, selectedXaxis);
-             xAxis = renderXAxis(xLinearScale, xAxis);
+             xAxis = drawXaxis(xLinearScale, xAxis);
 
              // update scatter plot with new values
              scatterGroup = renderCircles(scatterGroup, xLinearScale, selectedXaxis, yLinearScale, selectedYaxis);
@@ -192,7 +192,7 @@ d3.csv("assets/data/data.csv").then((healthData) => {
             selectedYaxis = value;
 
             yLinearScale = yScale(healthData, selectedYaxis);
-            yAxis = renderYAxis(yLinearScale, yAxis);
+            yAxis = drawYaxis(yLinearScale, yAxis);
 
             // update circles with new x values and texts
             scatterGroup = renderCircles(scatterGroup, xLinearScale, selectedXaxis, yLinearScale, selectedYaxis);
@@ -227,3 +227,37 @@ d3.csv("assets/data/data.csv").then((healthData) => {
 }).catch(function(error) {
     console.log(error);
 });
+
+// Update x/y scale variables
+function xScale(censusData, selectedXaxis) {
+    // create scales
+    var xLinearScale = d3.scaleLinear()
+                        .domain([d3.min(censusData, d => d[selectedXaxis]) * 0.9, d3.max(censusData, d => d[selectedXaxis]) * 1.1])
+                        .range([0, width]);
+    return xLinearScale;
+};
+
+function yScale(censusData, selectedYaxis) {
+    var yLinearScale = d3.scaleLinear()
+                        .domain([d3.min(censusData, d => d[selectedYaxis]) * 0.7, d3.max(censusData, d => d[selectedYaxis]) * 1.1])
+                        .range([height, 0]);
+    return yLinearScale;
+};
+
+// Redraw x/y axes
+function drawXaxis(newXScale, xAxis) {
+    var bottomAxis = d3.axisBottom(newXScale);
+    xAxis.transition()
+        .duration(1000)
+        .call(bottomAxis);
+
+    return xAxis;
+};
+
+function drawYaxis(newYScale, yAxis) {
+    var leftAxis = d3.axisLeft(newYScale);
+    yAxis.transition()
+        .duration(1000)
+        .call(leftAxis);
+    return yAxis;
+};

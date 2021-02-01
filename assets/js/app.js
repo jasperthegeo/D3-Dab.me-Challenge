@@ -261,3 +261,23 @@ function drawYaxis(newYScale, yAxis) {
         .call(leftAxis);
     return yAxis;
 };
+
+
+// Draw scatter plot, and create text labels
+function drawScatter(scatterGroup, newXScale, selectedXaxis, newYScale, selectedYaxis) {
+    scatterGroup.transition()
+        .duration(1000)
+        .attr("cx", d => newXScale(d[selectedXaxis]))
+        .attr("cy", d => newYScale(d[selectedYaxis]));
+    return scatterGroup;
+};
+
+// function to render text in circles
+function createText(scatterText, newXScale, selectedXaxis, newYScale, selectedYaxis) {
+    scatterText.transition()
+        .duration(1000)
+        .attr("x", d => newXScale(d[selectedXaxis]))
+        .attr("y", d => newYScale(d[selectedYaxis]));
+    
+    return scatterText;
+};

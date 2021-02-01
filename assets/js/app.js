@@ -3,7 +3,7 @@
 
 
 //Set-up Canvas
-var svgWidth = 1200; //window.innerWidth;
+var svgWidth = 1000; //window.innerWidth;
 var svgHeight = 600; //window.innerHeight;
 
 var margin = {

@@ -226,11 +226,6 @@ d3.csv("assets/data/data.csv").then((healthData) => {
 
                 // change classes to bold text
                 switch (selectedYaxis) {
-                    case "healthcare":
-                        yObesityLabel.classed("active", true).classed("inactive", false);
-                        ySmokesLabel.classed("inactive", true);
-                        yHealthLabel.classed("inactive", true);
-                        break;
                     case "smokes":
                         ySmokesLabel.classed("active", true).classed("inactive", false);
                         yHealthLabel.classed("inactive", true);
@@ -240,6 +235,11 @@ d3.csv("assets/data/data.csv").then((healthData) => {
                         yObesityLabel.classed("active", true).classed("inactive", false);
                         ySmokesLabel.classed("inactive", true);
                         yHealthLabel.classed("inactive", true);
+                        break;
+                    case "healthcare":
+                        yHealthLabel.classed("active", true).classed("inactive", false);
+                        ySmokesLabel.classed("inactive", true);
+                        yObesityLabel.classed("inactive", true);
                         break;
                 }
             }
@@ -338,3 +338,53 @@ function updateToolTip(selectedXaxis, selectedYaxis, xGroup, yGroup) {
     return xGroup, yGroup;
 
 };
+
+// var ctx = document.getElementById('myChart').getContext("2d")var myChart = new Chart(ctx, {
+//     type: 'line',
+//     data: {
+//         labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL"],
+//         datasets: [{
+//             label: "Data",
+//             borderColor: "#80b6f4",
+//             pointBorderColor: "#80b6f4",
+//             pointBackgroundColor: "#80b6f4",
+//             pointHoverBackgroundColor: "#80b6f4",
+//             pointHoverBorderColor: "#80b6f4",
+//             pointBorderWidth: 10,
+//             pointHoverRadius: 10,
+//             pointHoverBorderWidth: 1,
+//             pointRadius: 3,
+//             fill: false,
+//             borderWidth: 4,
+//             data: [100, 120, 150, 170, 180, 170, 160]
+//         }]
+//     },
+//     options: {
+//         legend: {
+//             position: "bottom"
+//         },
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     fontColor: "rgba(0,0,0,0.5)",
+//                     fontStyle: "bold",
+//                     beginAtZero: true,
+//                     maxTicksLimit: 5,
+//                     padding: 20
+//                 },
+//                 gridLines: {
+//                     drawTicks: false,
+//                     display: false
+//                 }}],
+//             xAxes: [{
+//                 gridLines: {
+//                     zeroLineColor: "transparent"},
+//                 ticks: {
+//                     padding: 20,
+//                     fontColor: "rgba(0,0,0,0.5)",
+//                     fontStyle: "bold"
+//                 }
+//             }]
+//         }
+//     }
+// });

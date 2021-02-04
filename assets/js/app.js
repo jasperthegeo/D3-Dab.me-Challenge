@@ -84,8 +84,7 @@ d3.csv("assets/data/data.csv").then((healthData) => {
                 .attr("cx", d => xLinearScale(d[selectedXaxis]))
                 .attr("cy", d => yLinearScale(d[selectedYaxis]))
                 .attr("r", "11.5")
-                .attr("fill", function(d){
-                    return "#3F2CAF"})//"#f57e42") // fill color for cirlces
+                .attr("fill", "#e37609") //"#f57e42") // fill color for cirlces
                 .attr("opacity", ".85")
 
     var scatterText = chartGroup.selectAll()
@@ -226,6 +225,11 @@ d3.csv("assets/data/data.csv").then((healthData) => {
 
                 // change classes to bold text
                 switch (selectedYaxis) {
+                    case "healthcare":
+                        yHealthLabel.classed("active", true).classed("inactive", false);
+                        ySmokesLabel.classed("inactive", true);
+                        yObesityLabel.classed("inactive", true);
+                        break;
                     case "smokes":
                         ySmokesLabel.classed("active", true).classed("inactive", false);
                         yHealthLabel.classed("inactive", true);
@@ -235,11 +239,6 @@ d3.csv("assets/data/data.csv").then((healthData) => {
                         yObesityLabel.classed("active", true).classed("inactive", false);
                         ySmokesLabel.classed("inactive", true);
                         yHealthLabel.classed("inactive", true);
-                        break;
-                    case "healthcare":
-                        yHealthLabel.classed("active", true).classed("inactive", false);
-                        ySmokesLabel.classed("inactive", true);
-                        yObesityLabel.classed("inactive", true);
                         break;
                 }
             }
@@ -295,7 +294,7 @@ function drawScatter(scatterGroup, newXScale, selectedXaxis, newYScale, selected
 };
 
 // function to render text in circles
-function createText(scatterText, newXScale, selectedXaxis, newYScale, selectedYaxis) {
+function createTexts(scatterText, newXScale, selectedXaxis, newYScale, selectedYaxis) {
     scatterText.transition()
         .duration(1000)
         .attr("x", d => newXScale(d[selectedXaxis]))
